@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+
+	<nav th:fragment="menu" class="nav-extended green">
+		<div id="menu" th:fragment="menu">
+			<div class="container">
+				<div class="nav-wrapper">
+					<a sec:authorize="isAuthenticated()" href="/" class="brand-logo">Central de Pesquisa e Extensão</a>
+					<a sec:authorize="!isAuthenticated()" class="brand-logo">Central de Pesquisa e Extensão</a>
+					<ul id="nav-mobile" class="right hide-on-med-and-down">
+						<li sec:authorize="!isAuthenticated()"><a href="#"
+							th:href="@{/cadastro}">Cadastre-se</a></li>
+						<li sec:authorize="!isAuthenticated()"><a href="#"
+							th:href="@{/login}">Entrar</a></li>
+						<li class="right" sec:authorize="isAuthenticated()"><a
+							class="dropdown-trigger" href="#!" data-target="dropdown-admin"><span
+								sec:authorize="isAuthenticated()"
+								sec:authentication="principal.nome"></span><i
+								class="material-icons right">arrow_drop_down</i></a></li>
+					</ul>
+				</div>
+				<div class="nav-content" sec:authorize="isAuthenticated()">
+					<ul class="tabs tabs-transparent">
+						<li class="tab"><a class="active" href="#" th:href="@{/}">Menu</a></li>
+						<li class="tab"><a class="active" href="#"
+							th:href="@{/projetos}">Lista de Projetos</a></li>
+						<li class="tab" sec:authorize="hasRole('ADMIN')"><a
+							class="active" href="#" th:href="@{/admin/usuarios}">Lista de
+								Usuários</a></li>
+					</ul>
+				</div>
+			</div>
+
+			<ul id="dropdown-admin" class="dropdown-content">
+				<li><a href="#!">Editar dados</a></li>
+				<li class="divider"></li>
+				<li><a href="#!">Alterar Senha</a></li>
+				<li class="divider"></li>
+				<li>
+					<form action="/logout" method="post">
+						<button class="btn" type="submit">Sair</button>
+						<input type="hidden" th:name="${_csrf.parameterName}"
+							th:value="${_csrf.token}" />
+					</form>
+				</li>
+			</ul>
+		</div>
+	</nav>
+
+
+	<div id="rodape" th:fragment="rodape">
+		<footer class="page-footer green">
+			<div class="container">
+				<div class="row">
+					<div class="col l6 s12">
+						<h5 class="white-text">Campus Avançado Lajes</h5>
+						<p class="grey-text text-lighten-4">BR-304, Km 120, s/n -
+							Centro, Lajes - RN, 59535-000</p>
+					</div>
+					<div class="col l4 offset-l2 s12">
+						<h5 class="white-text">Autores</h5>
+						<ul>
+							<li><a class="grey-text text-lighten-3">Francisco Lucas
+									Rocha Pereira</a></li>
+							<li><a class="grey-text text-lighten-3">Luiz Augusto
+									Fernandes</a></li>
+							<li><a class="grey-text text-lighten-3">Vinícius Pegado
+									de Oliveira</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="footer-copyright">
+				<div class="container">
+					© 2022 Instituto Federal de Educação, Ciência e Tecnologia do Rio
+					Grande do Norte<a class="grey-text text-lighten-4 right"></a>
+				</div>
+			</div>
+		</footer>
+	</div>
+
+	<div id="javascript" th:fragment="javascript">
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+		<script>
+			$(".dropdown-trigger").dropdown();
+
+			$(document).ready(function() {
+				$('.tooltipped').tooltip();
+			});
+		</script>
+	</div>
+
+</body>
+</html>
