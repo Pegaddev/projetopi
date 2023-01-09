@@ -8,7 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -23,13 +23,13 @@ public class Usuario implements UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@NotNull
+	@NotBlank
 	private String nome;
-	@NotNull
+	@NotBlank
 	private String email;
-	@NotNull
+	@NotBlank
 	private String matricula;
-	@NotNull
+	@NotBlank
 	private String senha;
 
 	@ManyToMany

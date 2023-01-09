@@ -62,6 +62,10 @@ body {
 									data-position="bottom" data-tooltip="Editar função"
 									th:href="@{/admin/usuarios/{id}(id=${usuario.id})}"><i
 										class="material-icons">edit</i></a></td>
+								<td class="right-align"><a class="btn-flat tooltipped"
+									data-position="bottom" data-tooltip="Deletar usuário"
+									th:href="@{/admin/usuarios/{id}/remover(id=${usuario.id})}"><i
+										class="material-icons">delete</i></a></td>
 							</tr>
 						</tbody>
 					</table>

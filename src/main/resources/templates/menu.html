@@ -11,8 +11,9 @@
 		<div id="menu" th:fragment="menu">
 			<div class="container">
 				<div class="nav-wrapper">
-					<a sec:authorize="isAuthenticated()" href="/" class="brand-logo">Central de Pesquisa e Extensão</a>
-					<a sec:authorize="!isAuthenticated()" class="brand-logo">Central de Pesquisa e Extensão</a>
+					<a sec:authorize="isAuthenticated()" href="/" class="brand-logo">Central
+						de Pesquisa e Extensão</a> <a sec:authorize="!isAuthenticated()"
+						class="brand-logo">Central de Pesquisa e Extensão</a>
 					<ul id="nav-mobile" class="right hide-on-med-and-down">
 						<li sec:authorize="!isAuthenticated()"><a href="#"
 							th:href="@{/cadastro}">Cadastre-se</a></li>
@@ -37,10 +38,11 @@
 				</div>
 			</div>
 
-			<ul id="dropdown-admin" class="dropdown-content">
-				<li><a href="#!">Editar dados</a></li>
+			<ul id="dropdown-admin" class="dropdown-content" sec:authorize="isAuthenticated()" th:object="${usuario}">
+				<li><a th:href="@{/usuarioDados/{id}(id=${#authentication.getPrincipal().getId()})}">Alterar
+						dados</a></li>
 				<li class="divider"></li>
-				<li><a href="#!">Alterar Senha</a></li>
+				<li><a th:href="@{/usuarioSenha/{id}(id=${#authentication.getPrincipal().getId()})}">Mudar senha</a></li>
 				<li class="divider"></li>
 				<li>
 					<form action="/logout" method="post">

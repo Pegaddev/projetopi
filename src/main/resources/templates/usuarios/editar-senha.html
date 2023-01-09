@@ -7,7 +7,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
-<title>Cadastro</title>
+<title>Alterar Senha</title>
 </head>
 <body>
 	<div th:replace="~{menu :: menu}"></div>
@@ -16,13 +16,13 @@
 
 		<div class="card">
 			<div class="card-content">
-				<span class="card-title"><strong>Preencha seus dados</strong></span>
+				<span class="card-title"><strong>Altere sua senha</strong></span>
 			</div>
 		</div>
 
 		<div class="card">
 			<div class="card-content">
-				<form action="/cadastro" method="post" th:object="${usuario}">
+				<form action="/editarSenha" method="post" th:object="${usuario}">
 
 					<div>
 						<input type="hidden" th:field="*{id}" readonly="readonly">
@@ -31,20 +31,20 @@
 					<div class="row">
 						<div class="col-12">
 							<label>Nome completo</label> <input type="text"
-								th:field="*{nome}">
+								th:field="*{nome}" readonly="readonly">
 							<p th:errors="*{nome}"></p>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-12">
 							<label>Matrícula</label> <input type="number"
-								th:field="*{matricula}">
+								th:field="*{matricula}" readonly="readonly">
 							<p th:errors="*{matricula}"></p>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-12">
-							<label>Email</label> <input type="text" th:field="*{email}">
+							<label>Email</label> <input type="text" th:field="*{email}" readonly="readonly">
 							<p th:errors="*{email}"></p>
 						</div>
 					</div>
@@ -52,6 +52,11 @@
 						<div class="col-12">
 							<label>Senha</label> <input type="password" th:field="*{senha}">
 							<p th:errors="*{senha}"></p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<input type="hidden" th:field="*{roles}" readonly="readonly">
 						</div>
 					</div>
 					<div class="row">
