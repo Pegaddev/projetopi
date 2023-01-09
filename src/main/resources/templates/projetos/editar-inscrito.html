@@ -63,8 +63,11 @@ body {
 					<div class="card-content">
 						<span class="card-title">Inscrever-se no projeto:</span>
 						<form
-							th:action="@{/projetos/{idProjeto}(idProjeto = ${projeto.id})}"
+							th:action="@{/projetos/{idProjeto}/editar(idProjeto = ${projeto.id})}"
 							method="post" th:object="${inscrito}">
+							<div>
+								 <input type="hidden" th:field="*{id}" readonly="readonly">
+							</div>
 							<div>
 								<label>Nome: </label> <input type="text" th:field="*{nome}">
 								<p th:errors="*{nome}"></p>
@@ -100,14 +103,6 @@ body {
 								<tr th:each="i : ${inscritos}">
 									<td th:text="${i.nome}"></td>
 									<td th:text="${i.email}"></td>
-									<td><a class="btn-flat tooltipped" data-position="bottom"
-										data-tooltip="Editar inscrito"
-										th:href="@{/projetos/{idProjeto}/inscritos/{idInscrito}/selecionar(idProjeto=${projeto.id}, idInscrito=${i.id})}"><i
-											class="material-icons">create_new_folder</i></a> <a
-										class="btn-flat tooltipped" data-position="bottom"
-										data-tooltip="Excluir inscrito"
-										th:href="@{/projetos/{idProjeto}/inscritos/{idInscrito}/remover(idProjeto=${projeto.id}, idInscrito=${i.id})}"><i
-											class="material-icons">clear</i></a></td>
 								</tr>
 							</tbody>
 						</table>

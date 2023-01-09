@@ -32,12 +32,10 @@ public class UsuarioController {
 		return "usuarios/form";
 	}
 	
-	@GetMapping("/editar")
 	public String formEdit(Usuario usuario) {
 		return "usuarios/editar-dados";
 	}
 	
-	@GetMapping("/editarSenha")
 	public String formEditSenha(Usuario usuario) {
 		return "usuarios/editar-senha";
 	}

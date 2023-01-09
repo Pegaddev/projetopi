@@ -77,6 +77,26 @@ public class ProjetosController {
 		return md;
 	}
 	
+	public ModelAndView editar (@PathVariable Long id, Inscrito inscrito) {
+		ModelAndView md = new ModelAndView();
+		
+		Optional <Projeto> opt = pr.findById(id);
+		
+		if(opt.isEmpty()) {
+			md.setViewName("redirect:/projetos");
+			return md;
+		}
+		
+		md.setViewName("projetos/editar-inscrito");
+		Projeto projeto = opt.get();
+		md.addObject("projeto", projeto);
+		
+		List<Inscrito> inscritos = ir.findByProjeto(projeto);
+		md.addObject("inscritos", inscritos);
+		
+		return md;
+	}
+	
 	@PostMapping("/{idProjeto}")
 	public ModelAndView salvarInscrito(@PathVariable Long idProjeto, @Valid Inscrito inscrito, BindingResult result, RedirectAttributes attributes) {
 		ModelAndView md = new ModelAndView();
@@ -85,8 +105,30 @@ public class ProjetosController {
 			return detalhar(idProjeto, inscrito);
 		}
 		
-		System.out.println("Id do projeto:" + idProjeto);
-		System.out.println(inscrito);
+		Optional<Projeto> opt = pr.findById(idProjeto);
+		if(opt.isEmpty()) {
+			md.setViewName("redirect:/projetos");
+			return md;
+		}
+		
+		Projeto projeto = opt.get();
+		inscrito.setProjeto(projeto);
+		
+		ir.save(inscrito);
+		
+		attributes.addFlashAttribute("mensagem", "Inscrito salvo com sucesso!");
+		
+		md.setViewName("redirect:/projetos/{idProjeto}");
+		return md;
+	}
+	
+	@PostMapping("/{idProjeto}/editar")
+	public ModelAndView editarInscrito(@PathVariable Long idProjeto, @Valid Inscrito inscrito, BindingResult result, RedirectAttributes attributes) {
+		ModelAndView md = new ModelAndView();
+		
+		if(result.hasErrors()) {
+			return editar(idProjeto, inscrito);
+		}
 		
 		Optional<Projeto> opt = pr.findById(idProjeto);
 		if(opt.isEmpty()) {
@@ -141,7 +183,7 @@ public class ProjetosController {
 			return md;
 		}
 		
-		md.setViewName("projetos/detalhes");
+		md.setViewName("projetos/editar-inscrito");
 		md.addObject("inscrito", inscrito);
 		md.addObject("projeto", projeto);
 		md.addObject("inscritos", ir.findByProjeto(projeto));
