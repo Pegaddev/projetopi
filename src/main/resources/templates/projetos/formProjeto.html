@@ -40,24 +40,28 @@ body {
 					<div>
 						<label>Nome do Projeto: </label> <input type="text"
 							th:field="*{nome}">
-						<p th:errors="*{nome}"></p>
+						<p class="card-content red lighten-2 z-depth-1"
+								style="color: white" th:errors="*{nome}"></p>
 					</div>
 
 					<div>
 						<label>Seu nome: </label> <input type="text"
 							th:field="*{nomeprof}">
-						<p th:errors="*{nomeprof}"></p>
+						<p class="card-content red lighten-2 z-depth-1"
+								style="color: white" th:errors="*{nomeprof}"></p>
 					</div>
 
 					<div>
 						<label>Seu email: </label> <input type="text" th:field="*{email}">
-						<p th:errors="*{email}"></p>
+						<p class="card-content red lighten-2 z-depth-1"
+								style="color: white" th:errors="*{email}"></p>
 					</div>
 
 					<div>
 						<label>Descrição do Projeto: </label> <input type="text"
 							th:field="*{descricao}">
-						<p th:errors="*{descricao}"></p>
+						<p class="card-content red lighten-2 z-depth-1"
+								style="color: white" th:errors="*{descricao}"></p>
 					</div>
 
 					<div>

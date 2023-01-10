@@ -8,11 +8,13 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ifrn.pi.projetos.models.Role;
 import ifrn.pi.projetos.models.Usuario;
@@ -32,19 +34,28 @@ public class UsuarioController {
 		return "usuarios/form";
 	}
 	
+	@GetMapping("/editar")
 	public String formEdit(Usuario usuario) {
 		return "usuarios/editar-dados";
 	}
 	
+	@GetMapping("/editarSenha")
 	public String formEditSenha(Usuario usuario) {
 		return "usuarios/editar-senha";
 	}
 	
 
 	@PostMapping("/cadastro")
-	public String salvar(@Valid Usuario usuario, BindingResult result) {
+	public String salvar(@Valid Usuario usuario, BindingResult result, RedirectAttributes attributes, Model model) {
 		
 		if(result.hasErrors()) {
+			return form(usuario);
+		}
+		
+		Usuario usr = ur.findByMatricula(usuario.getMatricula());
+		
+		if(usr!=null) {
+			model.addAttribute("mensagemErro", "Essa matrícula já está cadastrada!");
 			return form(usuario);
 		}
 		
@@ -57,8 +68,10 @@ public class UsuarioController {
 		usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
 		
 		ur.save(usuario);
-
-		return "redirect:/login";
+		
+		attributes.addFlashAttribute("mensagem", "Usuário cadastrado com sucesso!");
+		
+		return "redirect:/cadastro";
 	}
 	
 	
@@ -79,15 +92,17 @@ public class UsuarioController {
 	}
 	
 	@PostMapping("/editar")
-	public String editar(@Valid Usuario usuario, BindingResult result) {
+	public String editar(@Valid Usuario usuario, BindingResult result, RedirectAttributes attributes) {
 		
 		if(result.hasErrors()) {
 			return formEdit(usuario);
 		}
 		
 		ur.save(usuario);
+		
+		attributes.addFlashAttribute("mensagem", "Usuário editado com sucesso!");
 
-		return "redirect:/";
+		return "redirect:/editar";
 	}
 	
 	@GetMapping("/usuarioSenha/{id}")
@@ -107,7 +122,7 @@ public class UsuarioController {
 	}
 	
 	@PostMapping("/editarSenha")
-	public String editarSenha(@Valid Usuario usuario, BindingResult result) {
+	public String editarSenha(@Valid Usuario usuario, BindingResult result, RedirectAttributes attributes) {
 		
 		if(result.hasErrors()) {
 			return formEditSenha(usuario);
@@ -116,8 +131,10 @@ public class UsuarioController {
 		usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
 		
 		ur.save(usuario);
+		
+		attributes.addFlashAttribute("mensagem", "Senha editada com sucesso!");
 
-		return "redirect:/";
+		return "redirect:/editarSenha";
 	}
 	
 }

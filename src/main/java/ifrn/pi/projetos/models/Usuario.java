@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -23,12 +24,16 @@ public class Usuario implements UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@Size(min = 8, message = "O nome deve ter no mínimo 8 caracteres")
 	@NotBlank
 	private String nome;
+	@Size(min = 10, message = "O email deve ter no mínimo 10 caracteres")
 	@NotBlank
 	private String email;
+	@Size(min = 7, message = "a matrícula deve ter no mínimo 7 caracteres")
 	@NotBlank
 	private String matricula;
+	@Size(min = 8, message = "a senha deve ter no mínimo 8 caracteres")
 	@NotBlank
 	private String senha;
 

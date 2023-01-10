@@ -32,7 +32,10 @@ body {
 			</div>
 		</div>
 
-		<p th:if="${mensagem}" th:text="${mensagem}"></p>
+		<div class="card green lighten-2" th:if="${mensagem}">
+			<p class="card-content green lighten-2 z-depth-1"
+				style="color: white" th:text="${mensagem}"></p>
+		</div>
 
 		<div class="card">
 			<table class="highlight">
@@ -57,11 +60,11 @@ body {
 								class="material-icons">search</i></a> <a class="btn-flat tooltipped"
 							data-position="bottom" data-tooltip="Editar projeto"
 							th:href="@{/projetos/{id}/selecionar(id=${p.id})}"><i
-								class="material-icons">create_new_folder</i></a> <a
+								class="material-icons" sec:authorize="hasRole('ADMIN')">create_new_folder</i></a> <a
 							class="btn-flat tooltipped" data-position="bottom"
 							data-tooltip="Excluir projeto"
 							th:href="@{/projetos/{id}/remover(id=${p.id})}"> <i
-								class="material-icons">clear</i></a></td>
+								class="material-icons" sec:authorize="hasRole('ADMIN')">clear</i></a></td>
 
 					</tr>
 				</tbody>

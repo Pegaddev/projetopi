@@ -27,7 +27,10 @@ body {
 			</div>
 		</div>
 
-		<p th:if="${mensagem}" th:text="${mensagem}"></p>
+		<div class="card green lighten-2" th:if="${mensagem}">
+			<p class="card-content green lighten-2 z-depth-1"
+				style="color: white" th:text="${mensagem}"></p>
+		</div>
 
 		<div class="row">
 			<div class="col s12">
@@ -69,11 +72,13 @@ body {
 							</div>
 							<div>
 								<label>Nome: </label> <input type="text" th:field="*{nome}">
-								<p th:errors="*{nome}"></p>
+								<p class="card-content red lighten-2 z-depth-1"
+								style="color: white" th:errors="*{nome}"></p>
 							</div>
 							<div>
 								<label>Email: </label> <input type="text" th:field="*{email}">
-								<p th:errors="*{email}"></p>
+								<p class="card-content red lighten-2 z-depth-1"
+								style="color: white" th:errors="*{email}"></p>
 							</div>
 							<div>
 								<button type="submit" class="btn green">Alterar</button>

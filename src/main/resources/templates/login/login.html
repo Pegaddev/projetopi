@@ -19,10 +19,14 @@
 			</div>
 		</div>
 
-		<div th:if="${param.logout}" class="row">
-			<div class="col-4 center">
-				<p>Até a próxima!</p>
-			</div>
+		<div class="card green lighten-2" th:if="${param.logout}">
+			<p class="card-content green lighten-2 z-depth-1"
+				style="color: white">Até a próxima!</p>
+		</div>
+
+		<div class="card red lighten-2" th:if="${param.error}">
+			<p class="card-content red lighten-2 z-depth-1"
+				style="color: white">Matrícula ou senha estão incorretos!</p>
 		</div>
 
 		<div class="card">
