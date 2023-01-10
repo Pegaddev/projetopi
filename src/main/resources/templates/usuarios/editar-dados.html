@@ -24,11 +24,6 @@
 			<p class="card-content green lighten-2 z-depth-1"
 				style="color: white" th:text="${mensagem}"></p>
 		</div>
-		
-		<div class="card red lighten-2" th:if="${mensagemErro}">
-			<p class="card-content red lighten-2 z-depth-1"
-				style="color: white" th:text="${mensagemErro}"></p>
-		</div>
 
 		<div class="card">
 			<div class="card-content">
@@ -48,10 +43,8 @@
 					</div>
 					<div class="row">
 						<div class="col-12">
-							<label>Matrícula</label> <input type="number"
-								th:field="*{matricula}">
-							<p class="card-content red lighten-2 z-depth-1"
-								style="color: white" th:errors="*{matricula}"></p>
+							<label></label> <input type="hidden"
+								th:field="*{matricula}" readonly="readonly">
 						</div>
 					</div>
 					<div class="row">

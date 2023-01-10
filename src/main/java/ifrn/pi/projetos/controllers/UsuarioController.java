@@ -98,13 +98,6 @@ public class UsuarioController {
 			return formEdit(usuario);
 		}
 		
-		Usuario usr = ur.findByMatricula(usuario.getMatricula());
-		
-		if(usr!=null) {
-			model.addAttribute("mensagemErro", "Essa matrícula já está cadastrada!");
-			return formEdit(usuario);
-		}
-		
 		ur.save(usuario);
 		
 		attributes.addFlashAttribute("mensagem", "Usuário editado com sucesso!");
