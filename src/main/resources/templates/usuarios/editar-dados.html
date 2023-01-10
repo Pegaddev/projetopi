@@ -60,8 +60,8 @@
 						</div>
 					</div>
 					<div class="row">
-						<button class="btn" type="submit">Cadastrar</button>
-						<button class="btn" type="reset">Limpar</button>
+						<button class="btn green" type="submit">Alterar</button>
+						<a th:href="@{/}" class="btn green" type="reset">Cancelar</a>
 					</div>
 					<input type="hidden" th:name="${_csrf.parameterName}"
 						th:value="${_csrf.token}" />
