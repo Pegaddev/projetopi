@@ -24,6 +24,11 @@
 			<p class="card-content green lighten-2 z-depth-1"
 				style="color: white" th:text="${mensagem}"></p>
 		</div>
+		
+		<div class="card red lighten-2" th:if="${mensagemErro}">
+			<p class="card-content red lighten-2 z-depth-1"
+				style="color: white" th:text="${mensagemErro}"></p>
+		</div>
 
 		<div class="card">
 			<div class="card-content">

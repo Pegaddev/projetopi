@@ -92,9 +92,16 @@ public class UsuarioController {
 	}
 	
 	@PostMapping("/editar")
-	public String editar(@Valid Usuario usuario, BindingResult result, RedirectAttributes attributes) {
+	public String editar(@Valid Usuario usuario, BindingResult result, RedirectAttributes attributes, Model model) {
 		
 		if(result.hasErrors()) {
+			return formEdit(usuario);
+		}
+		
+		Usuario usr = ur.findByMatricula(usuario.getMatricula());
+		
+		if(usr!=null) {
+			model.addAttribute("mensagemErro", "Essa matrícula já está cadastrada!");
 			return formEdit(usuario);
 		}
 		
